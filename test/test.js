@@ -1,26 +1,30 @@
-import { person } from '/Users/ivanpyatanin/Documents/Python/tests/src/index.js'
+import { person } from '../src/index.js'
 
-test('one', () => {
+let dataList = [
+  {name: 'мечник', health: 10},
+  {name: 'маг', health: 100},
+  {name: 'лучник', health: 80},
+]
 
-	const pers = [{name: 'Маг', health: 90}]
 
-	const res = person(pers)
+test('тест проверки hp', () => {
 
-	expect(res).toBe('healthy')
-})
+	let data = dataList.sort(function(a, b) {
+		return b.health - a.health
+	})
 
-test('two', () => {
-	const pers = [{name: 'Лучник', health: 40}]	
+	for (const res of data) {
 
-	const res = person(pers)
+		let resData = person(res);
 
-	expect(res).toBe('wounded')
-})
-
-test('three', () => {
-	const pers = [{name: 'мечник', health: 10}]	
-
-	const res = person(pers)
-
-	expect(res).toBe('critical')
+		if (res.health >= 50) {
+			var resTest = 'healthy'
+		} else if (res.health >= 15) {
+			var resTest = 'wounded'
+		} else {
+			var resTest = 'critical'
+		}
+		expect(resData).toEqual(resTest)
+	}
+	
 })
